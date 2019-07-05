@@ -1,5 +1,4 @@
-function L63(;
-            T::AbstractFloat=Float64,
+function L63(::Type{T}=Float64;
             N::Int=10_000,
             xyz::Array{Float64,1}=[5.0,5.0,20.0],
             σ::Float64=10.0,
@@ -7,7 +6,7 @@ function L63(;
             β::Float64=8/3,
             s::Float64=1.0,
             Δt::Float64=0.005,
-            scheme::String="RK4")
+            scheme::String="RK4") where {T<:AbstractFloat}
 
             if scheme == "RK4"
                 return RK4(T,N,xyz,σ,ρ,β,s,Δt)
