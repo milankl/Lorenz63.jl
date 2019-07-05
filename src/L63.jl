@@ -5,7 +5,7 @@ function L63(::Type{T}=Float64;
             ρ::Float64=28.0,
             β::Float64=8/3,
             s::Float64=1.0,
-            Δt::Float64=0.005,
+            Δt::Float64=0.002,
             scheme::String="RK4") where {T<:AbstractFloat}
 
             if scheme == "RK4"
