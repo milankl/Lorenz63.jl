@@ -14,7 +14,7 @@ simulates the Lorenz system with `Float64` and standard parameters. Providing th
 
 ```julia
 XYZ = L63(Float16)
-```.
+```
 
 Change parameters by specifying optional arguments
 
