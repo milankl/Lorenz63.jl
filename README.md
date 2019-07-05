@@ -28,5 +28,5 @@ with `N` the number of time steps, `xyz` the initial conditions, `σ,ρ,β` the 
 In the package manager do
 
 ```julia
-add https://github.com/milankl/Lorenz63.j
+add https://github.com/milankl/Lorenz63.jl
 ```
