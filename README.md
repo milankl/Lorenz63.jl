@@ -22,3 +22,11 @@ Change parameters by specifying optional arguments
 XYZ = L63(Float32,N=100_000,xyz=[1.0,0.0,0.0],σ=10.0,ρ=28.0,β=8/3,s=1.0,Δt=0.005,scheme="RK4")
 ```
 with `N` the number of time steps, `xyz` the initial conditions, `σ,ρ,β` the conventional parameters of L63, `s` a scaling factor of the equations (that will be undone for storage), `Δt` the time step, and `scheme` the time integration scheme.
+
+# Installation
+
+In the package manager do
+
+```julia
+add https://github.com/milankl/Lorenz63.j
+```
