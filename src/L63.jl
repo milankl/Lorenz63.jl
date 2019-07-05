@@ -1,5 +1,5 @@
 function L63(;
-            T::DataType=Float64,
+            T::AbstractFloat=Float64,
             N::Int=10_000,
             xyz::Array{Float64,1}=[5.0,5.0,20.0],
             σ::Float64=10.0,
