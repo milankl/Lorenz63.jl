@@ -29,9 +29,10 @@ function RK4(T::Type,N::Int,xyz::Array{Float64,1},σ::Float64,ρ::Float64,β::Fl
 
     # convert everything to the desired number system determined by T
     xyz = T.(xyz)
+    s_inv = T(1.0 / s)
     ρ,β,s = T.([ρ,β,s])
-    RKα = T.(RKα)
-    RKβ = T.(RKβ)
+    one_over_RKα = T.(1.0 ./ RKα)
+    one_over_RKβ = T.(1.0 ./ RKβ)
 
     # preallocate memory for intermediate results
     xyz0 = deepcopy(xyz)
@@ -42,14 +43,14 @@ function RK4(T::Type,N::Int,xyz::Array{Float64,1},σ::Float64,ρ::Float64,β::Fl
         xyz1 = deepcopy(xyz)
 
         for rki = 1:4
-            rhs!(dxyz,xyz1[1],xyz1[2],xyz1[3],ρ,β,s)
+            rhs!(dxyz,xyz1[1],xyz1[2],xyz1[3],ρ,β,s_inv)
 
             if rki < 4
-                xyz1 = xyz + dxyz ./ RKβ[:,rki]
+                xyz1 = xyz + dxyz .* one_over_RKβ[:,rki]
             end
 
             # sum the RK steps on the go
-            xyz0 += dxyz ./ RKα[:,rki]
+            xyz0 += dxyz .* one_over_RKα[:,rki]
         end
 
         xyz = deepcopy(xyz0)
