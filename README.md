@@ -2,7 +2,7 @@
 
 ![attractor](figs/lorenz_attractor.png?raw=true "L63 attractor")
 
-Lorenz63.jl simulates the Lorenz 1963 system for any given number system, as long as conversions (to and from Float64) and arithmetics (+,-,*,/) are defined. Output always in Float64.
+Lorenz63.jl simulates the [Lorenz 1963 system](https://en.wikipedia.org/wiki/Lorenz_system) for any given number type, as long as conversions (to and from Float64) and arithmetics (+,-,*) are defined. Output always in Float64.
 
 # Usage
 
