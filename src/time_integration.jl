@@ -1,8 +1,9 @@
-function RK2_midpoint(N::Int,xyz::Array{T,1},ρ::T,β::T,s::T) where T
-
-
-#    for i = 1:N
-end
+#TODO
+# function RK2_midpoint(N::Int,xyz::Array{T,1},ρ::T,β::T,s::T) where T
+#
+#
+# #    for i = 1:N
+# end
 
 function RK4(T::Type,N::Int,xyz::Array{Float64,1},σ::Float64,ρ::Float64,β::Float64,s::Float64,Δt::Float64)
 
@@ -40,20 +41,28 @@ function RK4(T::Type,N::Int,xyz::Array{Float64,1},σ::Float64,ρ::Float64,β::Fl
     dxyz = zero(xyz)       # tendencies
 
     for i = 1:N
-        xyz1 = deepcopy(xyz)
+        for j in 1:3
+            @inbounds xyz1[j] = xyz[j]
+        end
 
         for rki = 1:4
             rhs!(dxyz,xyz1[1],xyz1[2],xyz1[3],ρ,β,s_inv)
 
             if rki < 4
-                xyz1 = xyz + dxyz .* one_over_RKβ[:,rki]
+                for j in 1:3
+                    @inbounds xyz1[j] = xyz[j] + dxyz[j] * one_over_RKβ[j,rki]
+                end
             end
 
             # sum the RK steps on the go
-            xyz0 += dxyz .* one_over_RKα[:,rki]
+            for j in 1:3
+                @inbounds xyz0[j] += dxyz[j] * one_over_RKα[j,rki]
+            end
         end
 
-        xyz = deepcopy(xyz0)
+        for j in 1:3
+            @inbounds xyz[j] = xyz0[j]
+        end
 
         # store as 64bit, undo scaling
         XYZout[:,i+1] = Float64.(xyz)/s_float
