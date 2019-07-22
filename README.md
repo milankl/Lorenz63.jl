@@ -23,6 +23,22 @@ XYZ = L63(Float32,N=100_000,xyz=[1.0,0.0,0.0],σ=10.0,ρ=28.0,β=8/3,s=1.0,Δt=0
 ```
 with `N` the number of time steps, `xyz` the initial conditions, `σ,ρ,β` the conventional parameters of L63, `s` a scaling factor of the equations (that will be undone for storage), `Δt` the time step, and `scheme` the time integration scheme.
 
+# Equations
+
+The Lorenz system is scaled with `s` and therefore the prognostic variables are actually  `sx -> x, sy -> y and sz -> z`. The RHS then reads with `s_inv = 1/s`
+
+```
+dx = y-x
+dy = x*(ρ-z*s_inv) - y
+dz = x*(y*s_inv) - β*z
+
+x_i+1 = x_i + RKx*dx
+y_i+1 = y_i + RKy*dy
+z_i+1 = z_i + RKz*dz
+```
+`RKx, RKy, RKz` include the Runge Kutta coefficients of the explicit time scheme (Runge Kutta 4th order by default), the time step `Δt` and for `x` also the parameter `σ` and are precomputed to avoid intermediate calculations.
+
+
 # Installation
 
 In the package manager do
