@@ -1,6 +1,6 @@
 # Lorenz63.jl - A type-stable Lorenz 1963 system simulator
 
-![attractor](figs/lorenz_attractor.png?raw=true "L63 attractor")
+![attractor](figs/lorenz_attrac.png?raw=true "L63 attractor")
 
 Lorenz63.jl simulates the [Lorenz 1963 system](https://en.wikipedia.org/wiki/Lorenz_system) for any given number type, as long as conversions (to and from Float64) and arithmetics (+,-,*) are defined - the scaled equations are written division-free. Output always in Float64.
 
