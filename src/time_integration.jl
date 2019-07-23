@@ -1,15 +1,7 @@
-#TODO
-# function RK2_midpoint(N::Int,xyz::Array{T,1},ρ::T,β::T,s::T) where T
-#
-#
-# #    for i = 1:N
-# end
-
 function RK4(T::Type,N::Int,xyz::Array{Float64,1},σ::Float64,ρ::Float64,β::Float64,s::Float64,Δt::Float64)
 
     # scale the initial conditions
     xyz = s*xyz
-    s_float = s     # keep a Float64 version of s
 
     # preallocate for storing results - store without scaling
     XYZout = Array{Float64,2}(undef,3,N+1)
@@ -28,8 +20,8 @@ function RK4(T::Type,N::Int,xyz::Array{Float64,1},σ::Float64,ρ::Float64,β::Fl
 
     # convert everything to the desired number system determined by T
     xyz = T.(xyz)
-    s_inv = T(1.0 / s)
-    ρ,β,s = T.([ρ,β,s])
+    s_inv = T(1.0/s)
+    ρ,β = T.([ρ,β])
     RKα = T.(RKα)
     RKβ = T.(RKβ)
 
@@ -39,7 +31,7 @@ function RK4(T::Type,N::Int,xyz::Array{Float64,1},σ::Float64,ρ::Float64,β::Fl
     dxyz = zero(xyz)       # tendencies
 
     for i = 1:N
-        for j in 1:3
+        @simd for j in 1:3
             @inbounds xyz1[j] = xyz[j]
         end
 
@@ -47,23 +39,23 @@ function RK4(T::Type,N::Int,xyz::Array{Float64,1},σ::Float64,ρ::Float64,β::Fl
             rhs!(dxyz,xyz1[1],xyz1[2],xyz1[3],ρ,β,s_inv)
 
             if rki < 4
-                for j in 1:3
+                @simd for j in 1:3
                     @inbounds xyz1[j] = xyz[j] + dxyz[j] * RKβ[j,rki]
                 end
             end
 
             # sum the RK steps on the go
-            for j in 1:3
+            @simd for j in 1:3
                 @inbounds xyz0[j] += dxyz[j] * RKα[j,rki]
             end
         end
 
-        for j in 1:3
+        @simd for j in 1:3
             @inbounds xyz[j] = xyz0[j]
         end
 
         # store as 64bit, undo scaling
-        XYZout[:,i+1] = Float64.(xyz)/s_float
+        XYZout[:,i+1] = Float64.(xyz)/s
     end
 
     return XYZout
