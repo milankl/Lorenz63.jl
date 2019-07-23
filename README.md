@@ -1,4 +1,4 @@
-# Lorenz63.jl - A type-stable Lorenz 1963 system simulator
+# Lorenz63.jl - A type-flexible Lorenz 1963 system simulator
 
 ![attractor](figs/lorenz_attrac.png?raw=true "L63 attractor")
 
