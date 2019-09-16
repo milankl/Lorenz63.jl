@@ -1,0 +1,13 @@
+name = "Lorenz63"
+uuid = "72db8b11-f6a9-4618-8243-341c46e36e41"
+authors = ["Milan Kloewer"]
+version = "0.1.0"
+
+[compat]
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
