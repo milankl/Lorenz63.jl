@@ -1,3 +1,8 @@
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Build Status](https://travis-ci.com/milankl/Lorenz63.jl.svg?branch=master)](https://travis-ci.com/milankl/Lorenz63.jl)
+[![Build status](https://ci.appveyor.com/api/projects/status/fbe7bvd6gs1qp9fy?svg=true)](https://ci.appveyor.com/project/milankl/lorenz63-jl)
+[![Build Status](https://api.cirrus-ci.com/github/milankl/Lorenz96.jl.svg)](https://cirrus-ci.com/github/milankl/Lorenz96.jl)
+
 # Lorenz63.jl - A type-stable Lorenz 1963 system simulator
 
 ![attractor](figs/lorenz_attractor.png?raw=true "L63 attractor")
