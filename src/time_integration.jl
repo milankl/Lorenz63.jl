@@ -1,11 +1,16 @@
-function RK4(T::Type,N::Int,xyz::Array{Float64,1},σ::Float64,ρ::Float64,β::Float64,s::Float64,Δt::Float64)
+function RK4(::Type{T},
+            N::Int,
+            xyz::Array{Float64,1},
+            σ::Float64,
+            ρ::Float64,
+            β::Float64,
+            s::Float64,
+            Δt::Float64) where {T<:AbstractFloat}
 
-    # scale the initial conditions
-    xyz = s*xyz
 
     # preallocate for storing results - store without scaling
     XYZout = Array{Float64,2}(undef,3,N+1)
-    XYZout[:,1] = xyz/s
+    XYZout[:,1] = xyz
 
     # Runge Kutta 4th order coefficients including time step and sigma for x
     RKα = zeros(3,4)
@@ -18,8 +23,8 @@ function RK4(T::Type,N::Int,xyz::Array{Float64,1},σ::Float64,ρ::Float64,β::Fl
     RKβ[3,:] = RKβ[2,:]
     RKβ[1,:] = RKβ[2,:]*σ
 
-    # convert everything to the desired number system determined by T
-    xyz = T.(xyz)
+    # convert everything to the desired number system determined by T and scale
+    xyz = T.(s*xyz)
     s_inv = T(1.0/s)
     ρ,β = T.([ρ,β])
     RKα = T.(RKα)
