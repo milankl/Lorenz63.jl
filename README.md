@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.com/milankl/Lorenz63.jl.svg?branch=master)](https://travis-ci.com/milankl/Lorenz63.jl)
 [![Build status](https://ci.appveyor.com/api/projects/status/fbe7bvd6gs1qp9fy?svg=true)](https://ci.appveyor.com/project/milankl/lorenz63-jl)
 [![Build Status](https://api.cirrus-ci.com/github/milankl/Lorenz63.jl.svg)](https://cirrus-ci.com/github/milankl/Lorenz63.jl)
+[![DOI](https://zenodo.org/badge/195269753.svg)](https://zenodo.org/badge/latestdoi/195269753)
 
 # Lorenz63.jl - A type-flexible Lorenz 1963 system simulator
 ![attractor](figs/lorenz_attrac.png?raw=true "L63 attractor")
