@@ -1,16 +1,19 @@
 function RK4(::Type{T},
             N::Int,
-            xyz::Array{Float64,1},
-            σ::Float64,
-            ρ::Float64,
-            β::Float64,
-            s::Float64,
-            Δt::Float64) where {T<:AbstractFloat}
+            xyz::Vector,
+            σ::Real,
+            ρ::Real,
+            β::Real,
+            s::Real,
+            Δt::Real;
+            output::Bool=true) where {T<:AbstractFloat}
 
 
     # preallocate for storing results - store without scaling
-    XYZout = Array{Float64,2}(undef,3,N+1)
-    XYZout[:,1] = xyz
+    if output
+        XYZout = Array{T,2}(undef,3,N+1)
+        XYZout[:,1] = xyz
+    end
 
     # Runge Kutta 4th order coefficients including time step and sigma for x
     RKα = zeros(3,4)
@@ -59,9 +62,14 @@ function RK4(::Type{T},
             @inbounds xyz[j] = xyz0[j]
         end
 
-        # store as 64bit, undo scaling
-        XYZout[:,i+1] = Float64.(xyz)/s
+        if output
+            XYZout[:,i+1] = xyz ./s
+        end
     end
 
-    return XYZout
+    if output
+        return XYZout
+    else
+        return xyz
+    end
 end

@@ -1,9 +1,11 @@
 name = "Lorenz63"
 uuid = "72db8b11-f6a9-4618-8243-341c46e36e41"
 authors = ["Milan Kloewer"]
-version = "0.1.0"
+version = "0.2.0"
 
 [deps]
+Distributed = "8ba89e20-285c-5b6f-9357-94700520ee1b"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
 
 [compat]
